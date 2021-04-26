@@ -108,6 +108,14 @@ android {
         unitTests.returnDefaultValues = true
     }
 
+    flavorDimensions 'MyApplication'
+
+    productFlavors {
+        Pipeline {
+            dimension "MyApplication"
+        }
+    }
+
     buildTypes {
         debug {
             testCoverageEnabled true

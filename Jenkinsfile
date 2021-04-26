@@ -23,9 +23,9 @@ pipeline{
 				echo "Get build type....."
 				script {
 					if (env.BRANCH_NAME == 'develop' || env.CHANGE_TARGET == 'develop') {
-						BUILD_TYPE = 'debug'
+						BUILD_TYPE = 'Debug'
 					} else if (env.BRANCH_NAME == 'master' || env.CHANGE_TARGET == 'master') {
-						BUILD_TYPE = 'release'
+						BUILD_TYPE = 'Release'
 					}
 				}
 			}
@@ -35,7 +35,7 @@ pipeline{
              steps {
 			    echo "start clearning and building......"
 				bat "gradlew clean"
-                bat "gradlew compile${BUILD_TYPE}Sources"
+                bat "gradlew compilePipeline${BUILD_TYPE}Sources"
 				//bat "gradlew compileDebugSources"
              }
         }
@@ -43,7 +43,7 @@ pipeline{
 		stage('Unit test&Code coverage ') {
 			steps {
 				echo "start unit testing......"
-				bat "gradlew test${BUILD_TYPE}UnitTest"
+				bat "gradlew testPipeline${BUILD_TYPE}UnitTest"
 				//bat "gradlew testDebugUnitTest"
 				bat "gradlew jacocoTestReport"
 				bat "gradlew jacocoTestCoverageVerification"
