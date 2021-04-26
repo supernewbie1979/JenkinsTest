@@ -45,13 +45,13 @@ task jacocoTestCoverageVerification(type: JacocoCoverageVerification) {
             limit {
                 counter = "BRANCH"
                 value = "COVEREDRATIO"
-                minimum = "0.30".toBigDecimal()
+                minimum = "0.90".toBigDecimal()
             }
 
             limit {
                 counter = "LINE"
                 value = "COVEREDRATIO"   // <-- code coverage
-                minimum = "0.30".toBigDecimal()
+                minimum = "0.80".toBigDecimal()
             }
         }
 //        rule {
