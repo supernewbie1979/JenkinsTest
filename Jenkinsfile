@@ -35,7 +35,7 @@ pipeline{
              steps {
 			    echo "start clearning and building......"
 				bat "gradlew clean"
-                bat "gradlew compilePipeline${BUILD_TYPE}Sources"
+                bat "gradlew compile${BUILD_TYPE}Sources"
 				//bat "gradlew compileDebugSources"
              }
         }
@@ -43,7 +43,7 @@ pipeline{
 		stage('Unit test&Code coverage ') {
 			steps {
 				echo "start unit testing......"
-				bat "gradlew testPipeline${BUILD_TYPE}UnitTest"
+				bat "gradlew test${BUILD_TYPE}UnitTest"
 				//bat "gradlew testDebugUnitTest"
 				bat "gradlew jacocoTestReport"
 				bat "gradlew jacocoTestCoverageVerification"

@@ -17,7 +17,7 @@ def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest
 def debugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
 def mainSrc = "${project.projectDir}/src/main/java"
 
-task jacocoTestReport(type: JacocoReport/*, dependsOn: ['testPipelineDebugUnitTest']*/) {
+task jacocoTestReport(type: JacocoReport/*, dependsOn: ['testDebugUnitTest']*/) {
     reports {
         xml.enabled = true
         html.enabled = true
@@ -25,7 +25,7 @@ task jacocoTestReport(type: JacocoReport/*, dependsOn: ['testPipelineDebugUnitTe
 
     sourceDirectories.from files([mainSrc])
     classDirectories.from  files([debugTree])
-    executionData.from files("${buildDir}/jacoco/testPipelineDebugUnitTest.exec")
+    executionData.from files("${buildDir}/jacoco/testDebugUnitTest.exec")
 }
 
 task jacocoTestCoverageVerification(type: JacocoCoverageVerification) {
@@ -35,7 +35,7 @@ task jacocoTestCoverageVerification(type: JacocoCoverageVerification) {
     sourceDirectories.from = files([mainSrc])
     classDirectories.from = files([debugTree])
     executionData.from = fileTree(dir: project.buildDir, includes: [
-            'jacoco/testPipelineDebugUnitTest.exec',
+            'jacoco/testDebugUnitTest.exec',
             'outputs/code_coverage/debugAndroidTest/connected/*.ec' //<-- instrumentation is not needed for now
     ])
 
@@ -106,14 +106,6 @@ android {
             }
         }
         unitTests.returnDefaultValues = true
-    }
-
-    flavorDimensions 'MyApplication'
-
-    productFlavors {
-        Pipeline {
-            dimension "MyApplication"
-        }
     }
 
     buildTypes {
