@@ -54,7 +54,6 @@ pipeline{
     }
 	
 	post {
-		echo "post....."
 		success {
 			setBuildStatus("Build succeeded", "SUCCESS");
 		}
