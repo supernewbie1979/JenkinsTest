@@ -8,4 +8,8 @@ class Car {
     fun getDriverAge(): Int {
         return 30
     }
+
+    fun getDriverHeight(): String {
+        return "1.7"
+    }
 }

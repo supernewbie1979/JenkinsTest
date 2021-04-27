@@ -11,7 +11,12 @@ import org.junit.Assert.*
  */
 class CarTest {
     @Test
-    fun testCarName() {
+    fun testDriverName() {
         assertEquals(Car().getDriverName(), "Lee")
+    }
+
+    @Test
+    fun testDriverAge() {
+        assertEquals(Car().getDriverAge(), 30)
     }
 }
