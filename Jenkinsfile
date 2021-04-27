@@ -39,7 +39,7 @@ pipeline{
              }
         }
 		
-		/*stage('Unit test&Code coverage ') {
+		stage('Unit test&Code coverage ') {
 			steps {
 				echo "start unit testing......"
 				bat "gradlew test${BUILD_TYPE}UnitTest"
@@ -47,7 +47,7 @@ pipeline{
 				bat "gradlew jacocoTestCoverageVerification"
 			}
 			
-		}*/
+		}
 
     }
 	
