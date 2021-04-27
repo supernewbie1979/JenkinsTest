@@ -2,13 +2,10 @@ name: Build
 on: [pull_request, push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-      - name: Build the app
-        run: chmod +x ./gradlew testDebugUnitTest
-      - name: Collect unit test report  
-        run: chmod +x ./gradlew jacocoTestReport
-      - name: verify the unit test result  
-        run: chmod +x ./gradlew jacocoTestCoverageVerification
+      - name: Run unit test
+        run: gradlew testDebugUnitTest
+     
