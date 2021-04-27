@@ -44,13 +44,19 @@ pipeline{
 				echo "start unit testing......"
 				bat "gradlew test${BUILD_TYPE}UnitTest"
 				bat "gradlew jacocoTestReport"
-				bat "gradlew jacocoTestCoverageVerification"
+				try {
+					bat "gradlew jacocoTestCoverageVerification"
+				} catch (Exception e) {
+					error("Build failed because of this and that.." + e.getMessage())
+				}
+				
 			}
 			
 		}
 
     }
 	
+	/*
 	post {
 		success {
 			setBuildStatus("Build succeeded", "SUCCESS");
@@ -58,6 +64,6 @@ pipeline{
 		failure {
 			setBuildStatus("Build failed", "FAILURE");
 		}
-  }
+	}*/
 
 }
