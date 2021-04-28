@@ -31,13 +31,14 @@ pipeline{
 			}
 		}
 		
+		/*
         stage('Clean & Compile'){
              steps {
 			    echo "start clearning and building......"
 				bat "gradlew clean"
                 bat "gradlew compile${BUILD_TYPE}Sources"
              }
-        }
+        }*/
 		
 		stage('Unit test&Code coverage ') {
 			steps {
@@ -50,6 +51,7 @@ pipeline{
 					} catch (Exception e) {
 					    echo e.getMessage()
 						error("Build failed because of this and that.." + e.getMessage())
+						junit '**/build/reports/jacoco/jacocoTestReport/html/*.html'
 					}
 				}
 				
