@@ -12,4 +12,8 @@ class Car {
     fun getDriverHeight(): String {
         return "1.7"
     }
+
+    fun getDriverSex(): String {
+        return "Male"
+    }
 }

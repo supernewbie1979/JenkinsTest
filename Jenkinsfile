@@ -31,26 +31,38 @@ pipeline{
 			}
 		}
 		
+		/*
         stage('Clean & Compile'){
              steps {
 			    echo "start clearning and building......"
 				bat "gradlew clean"
                 bat "gradlew compile${BUILD_TYPE}Sources"
              }
-        }
+        }*/
 		
-		/*stage('Unit test&Code coverage ') {
+		stage('Unit test&Code coverage ') {
 			steps {
 				echo "start unit testing......"
 				bat "gradlew test${BUILD_TYPE}UnitTest"
 				bat "gradlew jacocoTestReport"
-				bat "gradlew jacocoTestCoverageVerification"
+				script {
+					try {
+						bat "gradlew jacocoTestCoverageVerification"
+					} catch (Exception e) {
+					    echo e.getMessage()
+						error("Build failed because of this and that.." + e.getMessage())
+						junit '**/build/reports/jacoco/jacocoTestReport/html/*.html'
+					}
+				}
+				
+				
 			}
 			
-		}*/
+		}
 
     }
 	
+	/*
 	post {
 		success {
 			setBuildStatus("Build succeeded", "SUCCESS");
@@ -58,6 +70,6 @@ pipeline{
 		failure {
 			setBuildStatus("Build failed", "FAILURE");
 		}
-  }
+	}*/
 
 }
